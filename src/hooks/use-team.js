@@ -4,7 +4,7 @@ import { TeamContext } from "../global-states/team";
 export const useTeam = () => {
     const team = useContext(TeamContext);
 
-    if (team === null) {
+    if (team === undefined) {
         throw new Error("useTeam must be used within a <TeamProvider>");
     }
 
