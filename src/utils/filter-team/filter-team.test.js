@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { filterTeam } from "./filter-team";
-import { team } from "../../data/team";
+
+export const team = [
+    { id: 1, name: 'Aisha Beeharry', role: 'Product Designer' },
+    { id: 2, name: 'Jean-Luc Morel', role: 'Frontend Engineer' },
+    { id: 3, name: 'Priya Ramgoolam', role: 'Backend Engineer' },
+    { id: 4, name: 'Tiana Rakoto', role: 'QA Engineer' },
+]
 
 describe('Filter Team', () => {
     it('Returns the original team for an empty string', () => {
