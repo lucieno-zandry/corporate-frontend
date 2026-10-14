@@ -1,34 +1,19 @@
-import { useState } from 'react'
-import { team } from './data/team'
+import { SearchTeam } from "./components/search-team/search-team";
+import { TeamDirectory } from "./components/team-directory/team-directory";
+import { TeamProvider } from "./global-states/team";
+import { TeamSearchQueryProvider } from "./global-states/team-search-query";
 
 export default function App() {
-  const [query, setQuery] = useState('')
-
-  // TODO: filter team based on query
-  const filteredTeam = team
-
   return (
-    <main>
-      <h1>Team Directory</h1>
+    <TeamSearchQueryProvider>
+      <TeamProvider>
+        <main>
+          <h1>Team Directory</h1>
 
-      <label htmlFor="search">Search by name</label>
-      <input
-        id="search"
-        type="search"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="e.g. Priya"
-      />
-
-      <ul>
-        {filteredTeam.map((member) => (
-          <li key={member.id}>
-            {member.name} — {member.role}
-          </li>
-        ))}
-      </ul>
-
-      {filteredTeam.length === 0 && <p>No team members found.</p>}
-    </main>
+          <SearchTeam />
+          <TeamDirectory />
+        </main>
+      </TeamProvider>
+    </TeamSearchQueryProvider>
   )
 }
