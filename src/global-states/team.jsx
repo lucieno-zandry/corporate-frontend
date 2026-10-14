@@ -3,10 +3,8 @@ import { team as defaultTeam } from "../data/team";
 
 export const TeamContext = createContext(null);
 
-export const TeamProvider = ({ children }) => {
-    const [team, setTeam] = useState(defaultTeam);
-
-    return <TeamContext.Provider value={{ team, setTeam }}>
+export const TeamProvider = ({ children, team = defaultTeam}) => {
+    return <TeamContext.Provider value={team}>
         {children}
     </TeamContext.Provider>
 }
