@@ -32,4 +32,11 @@ describe('Filter Team', () => {
             { id: 3, name: 'Priya Ramgoolam', role: 'Backend Engineer' },
         ])
     })
+
+    it('collapses internal whitespace so double spaces still match', () => {
+        expect(filterTeam(team, 'priya  ramgoolam')).toEqual([
+            { id: 3, name: 'Priya Ramgoolam', role: 'Backend Engineer' },
+        ])
+    })
 })
+
