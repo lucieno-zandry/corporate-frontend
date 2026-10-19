@@ -5,5 +5,5 @@
  * @returns string
  */
 export const stripString = (str) => {
-    return str.toLowerCase().trim()
+    return str.toLowerCase().replace(/[\s]+/g, '')
 }
