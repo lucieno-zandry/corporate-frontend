@@ -1,5 +1,5 @@
 import { useContext } from "react"
-import { TeamContext } from "../global-states/team";
+import { TeamContext } from "../contexts/team";
 
 export const useTeam = () => {
     const team = useContext(TeamContext);

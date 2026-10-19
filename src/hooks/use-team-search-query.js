@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { TeamSearchQueryContext } from "../global-states/team-search-query";
+import { TeamSearchQueryContext } from "../contexts/team-search-query-context";
 
 export const useTeamSearchQuery = () => {
     const context = useContext(TeamSearchQueryContext);

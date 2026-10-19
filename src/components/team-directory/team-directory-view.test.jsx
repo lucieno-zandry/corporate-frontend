@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest"
-import { TeamDirectoryView } from "./team-directory-view"
 import { render, screen } from "@testing-library/react"
+import { TeamDirectoryView } from "./team-directory-view"
 
 const team = [
     { id: 1, name: 'Aisha Beeharry', role: 'Product Designer' },
