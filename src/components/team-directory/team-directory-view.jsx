@@ -1,5 +1,5 @@
-import { TeamListEmptyView } from "../team-list-empty/team-list-empty-view";
 import { TeamListView } from "../team-list/team-list-view";
+import { TeamListEmptyView } from "./team-directory-empty-view";
 
 export const TeamDirectoryView = ({ team }) => {
     

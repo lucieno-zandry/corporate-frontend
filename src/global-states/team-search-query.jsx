@@ -1,6 +1,5 @@
-import { createContext, useState } from "react";
-
-export const TeamSearchQueryContext = createContext(undefined);
+import { useState } from "react";
+import { TeamSearchQueryContext } from "../contexts/team-search-query-context";
 
 export const TeamSearchQueryProvider = ({ children }) => {
     const [query, setQuery] = useState('');
