@@ -1,4 +1,9 @@
-export const SearchTeamView = ({ query, setQuery }) => {
+interface SearchTeamViewProps {
+    query: string,
+    setQuery: (query: string) => void
+}
+
+export const SearchTeamView = ({ query, setQuery }: SearchTeamViewProps) => {
     return <>
         <label htmlFor="search">Search by name</label>
         <input

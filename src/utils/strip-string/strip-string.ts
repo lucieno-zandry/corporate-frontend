@@ -1,9 +1,3 @@
-
-/**
- * 
- * @param {string} str 
- * @returns string
- */
-export const stripString = (str) => {
+export const stripString = (str: string) => {
     return str.toLowerCase().replace(/[\s]+/g, '')
 }
