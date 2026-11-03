@@ -1,12 +1,11 @@
-import { useContext } from "react"
-import { TeamContext } from "../contexts/team";
+import { useQuery } from "@tanstack/react-query";
+import { fetchTeam } from "../api/team";
 
 export const useTeam = () => {
-    const team = useContext(TeamContext);
+    const { isPending, error, data: team = [] } = useQuery({
+        queryKey: ['fetchTeam'],
+        queryFn: fetchTeam,
+    });
 
-    if (team === undefined) {
-        throw new Error("useTeam must be used within a <TeamProvider>");
-    }
-
-    return {team};
+    return { team, isPending, error };
 };
