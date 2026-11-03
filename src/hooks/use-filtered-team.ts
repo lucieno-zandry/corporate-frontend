@@ -4,9 +4,9 @@ import { useTeam } from "./use-team";
 
 export const useFilteredTeam = () => {
     const { query } = useTeamSearchQuery();
-    const { team } = useTeam();
+    const { team, ...meta } = useTeam();
 
     const filteredTeam = filterTeam(team, query);
 
-    return { filteredTeam };
+    return { filteredTeam, ...meta };
 }
