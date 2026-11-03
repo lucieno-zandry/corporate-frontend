@@ -1,4 +1,10 @@
-export const TeamListView = ({ team }) => {
+import { TeamMember } from "../../types"
+
+interface TeamListViewProps {
+    team: TeamMember[],
+}
+
+export const TeamListView = ({ team }: TeamListViewProps) => {
     return <ul>
         {team.map((member) => (
             <li key={member.id}>

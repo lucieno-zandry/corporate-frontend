@@ -1,3 +1,8 @@
 import { createContext } from "react";
 
-export const TeamSearchQueryContext = createContext(undefined);
+interface TeamSearchQueryContextData {
+    query: string,
+    setQuery: (query: string) => void
+}
+
+export const TeamSearchQueryContext = createContext<TeamSearchQueryContextData | undefined>(undefined);
