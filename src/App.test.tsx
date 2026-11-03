@@ -1,15 +1,31 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi, beforeEach } from 'vitest'
 import App from './App'
+import { renderWithProviders } from './test-utils'
+import * as api from './api/team' // Import the API module
+
+// Mock the API module so we can control it
+vi.mock('./api/team')
 
 describe('App', () => {
+    beforeEach(() => {
+        // Before each test, make the mock return data instantly
+        vi.mocked(api.fetchTeam).mockResolvedValue([
+            { id: 1, name: 'Aisha Beeharry', role: 'Product Designer' },
+            { id: 2, name: 'Jean-Luc Morel', role: 'Frontend Engineer' },
+            { id: 3, name: 'Priya Ramgoolam', role: 'Backend Engineer' },
+            { id: 4, name: 'Tiana Rakoto', role: 'QA Engineer' },
+        ])
+    })
+
     it('filters the team list by name as the user types', async () => {
         const user = userEvent.setup()
-        render(<App />)
+        renderWithProviders(<App />)
 
-        // sanity: all members visible initially
-        expect(screen.getAllByRole('listitem')).toHaveLength(4)
+        // Now it will load instantly
+        const initialItems = await screen.findAllByRole('listitem')
+        expect(initialItems).toHaveLength(4)
 
         await user.type(screen.getByLabelText('Search by name'), 'priya')
 
@@ -18,13 +34,21 @@ describe('App', () => {
         expect(items[0]).toHaveTextContent('Priya Ramgoolam')
     })
 
-    it('shows the empty state when nothing matches', async () => {
-        const user = userEvent.setup()
-        render(<App />)
+    it('shows a loading state initially', () => {
+        // Make the mock hang forever so we stay in the loading state
+        vi.mocked(api.fetchTeam).mockReturnValue(new Promise(() => { }))
 
-        await user.type(screen.getByLabelText('Search by name'), 'zzz')
+        renderWithProviders(<App />)
+        expect(screen.getByText(/Loading team/i)).toBeInTheDocument()
+    })
 
-        expect(screen.getByText('No team members found.')).toBeInTheDocument()
-        expect(screen.queryByRole('list')).not.toBeInTheDocument()
+    it('shows an error state if the API fails', async () => {
+        // Make the mock reject
+        vi.mocked(api.fetchTeam).mockRejectedValue(new Error('Network failed'))
+
+        renderWithProviders(<App />)
+
+        // Wait for the error view to appear
+        expect(await screen.findByText('Network failed')).toBeInTheDocument()
     })
 })

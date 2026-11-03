@@ -11,13 +11,13 @@ const team = [
 
 describe('TeamDirectoryView', () => {
     it('shows the empty message when there are no team members', () => {
-        render(<TeamDirectoryView team={[]} />)
+        render(<TeamDirectoryView team={[]} error={null} isPending={false} />)
 
         expect(screen.getByText('No team members found.')).toBeInTheDocument()
     })
 
     it('renders a list when the team has members', () => {
-        render(<TeamDirectoryView team={team} />)
+        render(<TeamDirectoryView team={team} error={null} isPending={false} />)
 
         expect(screen.getByRole('list')).toBeInTheDocument();
     })
